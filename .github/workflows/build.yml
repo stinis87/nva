@@ -1,0 +1,19 @@
+name: Build
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup DDEV
+        uses: ddev/github-action-setup-ddev@v1
+      - name: Validate composer
+        run: ddev composer validate
+      - name: Composer install
+        run: ddev composer install
+      - name: Run phpcs
+        run: ddev /vendor/bin/phpcs
+      - name: PhpStan
+        run: ddev /vendor/bin/phpstan analyse src
