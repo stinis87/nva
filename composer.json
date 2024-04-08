@@ -1,0 +1,18 @@
+{
+    "name": "stinis87/nva",
+    "description": "Integration with nva api",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Stinis\\Nva\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Stian Kilaas",
+            "email": "stian.kilaas@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
