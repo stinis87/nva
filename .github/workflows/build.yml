@@ -14,6 +14,6 @@ jobs:
       - name: Composer install
         run: ddev composer install
       - name: Run phpcs
-        run: ddev /vendor/bin/phpcs
+        run: ddev php ./vendor/bin/phpcs src
       - name: PhpStan
-        run: ddev /vendor/bin/phpstan analyse src
+        run: ddev php ./vendor/bin/phpstan analyse src
