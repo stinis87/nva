@@ -10,7 +10,7 @@ trait NvaPublicSearch
      * @param array $params
      * @return array
      */
-    public function searchPublications($params): array
+    public function searchPublications(array $params): array
     {
         return $this->sendRequest('GET', 'search/resources', $params);
     }
@@ -21,7 +21,7 @@ trait NvaPublicSearch
      * @param array $params
      * @return array
      */
-    public function exportPublications($params): array
+    public function exportPublications(array $params): array
     {
         return $this->sendRequest('GET', 'search/resources/export', $params);
     }

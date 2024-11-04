@@ -4,83 +4,74 @@ namespace Stinis\Nva;
 
 trait CristinRequests
 {
-    public function getCristinPersonByOrganization(string $id, $params = [])
+    public function getCristinPersonByOrganization(string $id, $params = []): array
     {
         return $this->sendRequest('get', 'cristin/organization/' . $id . '/persons', $params);
     }
 
-    public function getCristinOrganization(string $id, $params = [])
+    public function getCristinOrganization(string $id, $params = []): array
     {
         return $this->sendRequest('get', 'cristin/organization/' . $id, $params);
     }
 
-    public function getCristinOrganizationByQueryParameters(array $params = [])
+    public function getCristinOrganizationByQueryParameters(array $params): array
     {
-        if (empty($params)) {
-            return 'It is required to provide query parameters for this endpoint.';
-        }
         return $this->sendRequest('get', 'cristin/organization', $params);
     }
 
-    public function getCristinSupportedCountries()
+    public function getCristinSupportedCountries(): array
     {
         return $this->sendRequest('get', 'cristin/country');
     }
 
-    public function getCristinFundingSources()
+    public function getCristinFundingSources(): array
     {
         return $this->sendRequest('get', 'cristin/funding-sources');
     }
 
-    public function getCristinFundingSourceById(string $id)
+    public function getCristinFundingSourceById(string $id): array
     {
         return $this->sendRequest('get', 'cristin/funding-sources/' . $id);
     }
 
-    public function getCristinProjectById(string $id)
+    public function getCristinProjectById(string $id): array
     {
         // Pass empty query params here since endpoint does not support any.
         return $this->sendRequest('get', 'cristin/project/' . $id, []);
     }
 
-    public function getCristinProjectByQueryParameters(array $params)
+    public function getCristinProjectByQueryParameters(array $params): array
     {
-        if (empty($params)) {
-            return 'It is required to provide query parameters for this endpoint.';
-        }
         return $this->sendRequest('get', 'cristin/project/', $params);
     }
 
-    public function getCristinPersonById(string $id)
+    public function getCristinPersonById(string $id): array
     {
         // Pass empty query params here since endpoint does not support any.
         return $this->sendRequest('get', 'cristin/person/' . $id, []);
     }
 
-    public function getCristinPersonByQueryParameters(array $params = [])
+    public function getCristinPersonByQueryParameters(array $params): array
     {
-        if (empty($params)) {
-            return 'It is required to provide query parameters for this endpoint.';
-        }
         return $this->sendRequest('get', 'cristin/person/', $params);
     }
 
-    public function getCristinKeywordById(string $id)
+    public function getCristinKeywordById(string $id): array
     {
         return $this->sendRequest('get', 'cristin/keyword/' . $id);
     }
 
-    public function getCristinKeywords($params = [])
+    public function getCristinKeywords($params = []): array
     {
         return $this->sendRequest('get', 'cristin/keyword', $params);
     }
 
-    public function getCristinCategories()
+    public function getCristinCategories(): array
     {
         return $this->sendRequest('get', 'cristin/category/project');
     }
 
-    public function getCristinProjectsByOrganization(string $id, $params = [])
+    public function getCristinProjectsByOrganization(string $id, $params = []): array
     {
         return $this->sendRequest('get', 'cristin/organization/' . $id . '/projects', $params);
     }
