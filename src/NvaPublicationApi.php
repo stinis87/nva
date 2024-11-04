@@ -4,27 +4,52 @@ namespace Stinis\Nva;
 
 trait NvaPublicationApi
 {
-    public function getPublicationByOwner()
+    /**
+     * Get a list of publications by owner.
+     *
+     * @return array
+     */
+    public function getPublicationByOwner(): array
     {
         return $this->sendRequest('GET', 'publication/by-owner');
     }
 
-    public function deletePublicationByUuid(string $uuid)
+    /**
+     * Delete a publication by UUID.
+     *
+     * @return array
+     */
+    public function deletePublicationByUuid(string $uuid): array
     {
         return $this->sendRequest('DELETE', 'publication/' . $uuid);
     }
 
-    public function updatePublicationByUuid(string $uuid)
+    /**
+     * Update a publication by UUID.
+     *
+     * @return array
+     */
+    public function updatePublicationByUuid(string $uuid): array
     {
         return $this->sendRequest('PUT', 'publication/' . $uuid);
     }
 
-    public function getPublicationByUuid($uuid)
+    /**
+     * Get a publication by UUID.
+     *
+     * @return array
+     */
+    public function getPublicationByUuid($uuid): array
     {
         return $this->sendRequest('GET', 'publication/' . $uuid);
     }
 
-    public function getPublicationContext()
+    /**
+     * Get publication context.
+     *
+     * @return array
+     */
+    public function getPublicationContext(): array
     {
         return $this->sendRequest('GET', 'publication/context');
     }

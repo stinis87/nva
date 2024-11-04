@@ -17,11 +17,6 @@ class APIClient
     private string $apiUrl;
 
     /**
-     * Last response.
-     */
-    private array $lastResponse = [];
-
-    /**
      * Access token.
      */
     private string $accessToken = '';
@@ -32,29 +27,9 @@ class APIClient
     private int $accessTokenExpiration;
 
     /**
-     * Client id.
-     */
-    private string $clientId = '';
-
-    /**
-     * Client secret.
-     */
-    private string $clientSecret = '';
-
-    /**
-     * Token URL.
-     */
-    private string $tokenUrl = '';
-
-    /**
      * HTTP client.
      */
     private Client $httpClient;
-
-    /**
-     * Results.
-     */
-    private array $results = [];
 
     public function __construct()
     {
@@ -71,16 +46,13 @@ class APIClient
      */
     public function authenticate(): array|bool
     {
-        $this->clientId = $_ENV['CLIENT_ID'];
-        $this->clientSecret = $_ENV['CLIENT_SECRET'];
-        $this->tokenUrl = $_ENV['TOKEN_URL'];
         $params = [
             'grant_type' => 'client_credentials',
-            'client_id' => $this->clientId,
-            'client_secret' => $this->clientSecret,
+            'client_id' => $_ENV['CLIENT_ID'],
+            'client_secret' => $_ENV['CLIENT_SECRET'],
         ];
         // Make a POST request to obtain access token
-        $response = $this->httpClient->post($this->tokenUrl, [
+        $response = $this->httpClient->post($_ENV['TOKEN_URL'], [
             'form_params' => $params,
         ]);
         if ($response->getStatusCode() !== 200) {
