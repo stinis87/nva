@@ -40,6 +40,9 @@ class APIClient
         } else {
             throw new \RuntimeException('Unable to locate .env file.');
         }
+        if (empty($_ENV['API_URL'])) {
+            throw new \RuntimeException('API_URL must be set in .env file.');
+        }
         $this->httpClient = new Client();
         $this->apiUrl = $_ENV['API_URL'];
     }
@@ -69,6 +72,9 @@ class APIClient
      */
     public function authenticate(): array|bool
     {
+        if (empty($_ENV['CLIENT_ID'] || empty($_ENV['CLIENT_SECRET']))) {
+            throw new \RuntimeException('CLIENT_ID and CLIENT_SECRET must be set in .env file.');
+        }
         $params = [
             'grant_type' => 'client_credentials',
             'client_id' => $_ENV['CLIENT_ID'],
