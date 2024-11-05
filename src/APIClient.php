@@ -34,9 +34,32 @@ class APIClient
     public function __construct()
     {
         $dotenv = new Dotenv();
-        $dotenv->load(__DIR__ . '/../.env');
+        $envFilePath = $this->findEnvFile();
+        if ($envFilePath) {
+            $dotenv->load($envFilePath);
+        } else {
+            throw new \RuntimeException('Unable to locate .env file.');
+        }
         $this->httpClient = new Client();
         $this->apiUrl = $_ENV['API_URL'];
+    }
+
+    /**
+     * Find .env file.
+     *
+     * @return string|null
+     */
+    private function findEnvFile(): ?string
+    {
+        $currentDir = __DIR__;
+        while ($currentDir !== dirname($currentDir)) {
+            $envFilePath = $currentDir . '/.env';
+            if (file_exists($envFilePath)) {
+                return $envFilePath;
+            }
+            $currentDir = dirname($currentDir);
+        }
+        return null;
     }
 
     /**
