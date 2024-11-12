@@ -14,7 +14,9 @@ class APIClient
     /**
      * API URL.
      */
-    private string $apiUrl;
+    private const API_URL = 'https://api.test.nva.aws.unit.no/';
+
+    private const TOKEN_URL = 'https://nva-test-ext.auth.eu-west-1.amazoncognito.com/oauth2/token';
 
     /**
      * Access token.
@@ -40,11 +42,7 @@ class APIClient
         } else {
             throw new \RuntimeException('Unable to locate .env file.');
         }
-        if (empty($_ENV['API_URL'])) {
-            throw new \RuntimeException('API_URL must be set in .env file.');
-        }
         $this->httpClient = new Client();
-        $this->apiUrl = $_ENV['API_URL'];
     }
 
     /**
@@ -81,7 +79,7 @@ class APIClient
             'client_secret' => $_ENV['CLIENT_SECRET'],
         ];
         // Make a POST request to obtain access token
-        $response = $this->httpClient->post($_ENV['TOKEN_URL'], [
+        $response = $this->httpClient->post(self::TOKEN_URL, [
             'form_params' => $params,
         ]);
         if ($response->getStatusCode() !== 200) {
@@ -114,7 +112,7 @@ class APIClient
                 'query' => $params,
             ];
             $response = $this->httpClient->$method(
-                $this->apiUrl . $endpoint,
+                self::API_URL . $endpoint,
                 $requestOptions,
             );
             return json_decode($response->getBody()->getContents(), true);
