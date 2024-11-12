@@ -1,5 +1,24 @@
 NVA (Nasjonaltiv vitenarkiv) API Client designed to interact with the NVA API. It provides a simple and efficient way to make requests to this API, allowing you to search for publications, persons and other related data.
 
+Examples of usages include:
+
+- Get all Cristin categories
+- Get Cristin person by organization
+- Get Cristin organization
+- Get Cristin organization by query parameters
+- Get Cristin supported countries
+- Get Cristin funding sources
+- Get Cristin funding source by id
+- Get Cristin project by id
+- Get Cristin project by query parameters
+- Get Cristin person by id
+- Get Cristin person by query parameters
+- Get Cristin keyword by id
+- Get Cristin keywords
+- Get Cristin projects by organization
+- Search publications
+- Export publications
+
 Installation
 ============
 
