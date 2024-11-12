@@ -20,5 +20,7 @@
     "require": {
         "guzzlehttp/guzzle": "^7.9.2",
         "symfony/dotenv": "^7.1.6"
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
