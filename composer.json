@@ -2,6 +2,7 @@
     "name": "stinis87/nva",
     "description": "Integration with nva api",
     "type": "library",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Stinis\\Nva\\": "src/"
