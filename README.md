@@ -1,6 +1,3 @@
-> NVA (Nasjonaltiv vitenarkiv) API Client designed to interact with the NVA API.
-> It provides a simple and efficient way to make requests to this API, allowing you to search for publications, 
-> persons and other related data.
 
 Examples of usages include:
 
