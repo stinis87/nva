@@ -33,16 +33,30 @@ class APIClient
      */
     private Client $httpClient;
 
-    public function __construct()
+    private string $clientId;
+    private string $clientSecret;
+    private string $apiUrl;
+
+    private array $customHeaders = [];
+
+    public function __construct(?string $clientId = null, ?string $clientSecret = null, ?string $apiUrl = null)
     {
-        $dotenv = new Dotenv();
-        $envFilePath = $this->findEnvFile();
-        if ($envFilePath) {
-            $dotenv->load($envFilePath);
+        if ($clientId && $clientSecret) {
+            $this->clientId = $clientId;
+            $this->clientSecret = $clientSecret;
         } else {
-            throw new \RuntimeException('Unable to locate .env file.');
+            $dotenv = new Dotenv();
+            $envFilePath = $this->findEnvFile();
+            if ($envFilePath) {
+                $dotenv->load($envFilePath);
+            } else {
+                throw new \RuntimeException('Unable to locate .env file.');
+            }
+            $this->clientId = $_ENV['CLIENT_ID'] ?? '';
+            $this->clientSecret = $_ENV['CLIENT_SECRET'] ?? '';
         }
         $this->httpClient = new Client();
+        $this->apiUrl = $apiUrl ?? 'https://api.nva.unit.no/';
     }
 
     /**
@@ -70,13 +84,13 @@ class APIClient
      */
     public function authenticate(): array|bool
     {
-        if (empty($_ENV['CLIENT_ID'] || empty($_ENV['CLIENT_SECRET']))) {
-            throw new \RuntimeException('CLIENT_ID and CLIENT_SECRET must be set in .env file.');
+        if (empty($this->clientId) || empty($this->clientSecret)) {
+            throw new \RuntimeException('CLIENT_ID and CLIENT_SECRET must be set.');
         }
         $params = [
             'grant_type' => 'client_credentials',
-            'client_id' => $_ENV['CLIENT_ID'],
-            'client_secret' => $_ENV['CLIENT_SECRET'],
+            'client_id' => $this->clientId,
+            'client_secret' => $this->clientSecret,
         ];
         // Make a POST request to obtain access token
         $response = $this->httpClient->post(self::TOKEN_URL, [
@@ -94,6 +108,26 @@ class APIClient
     }
 
     /**
+     * Set the API base URL (e.g., for Gravitee).
+     *
+     * @param string $apiUrl
+     */
+    public function setApiUrl(string $apiUrl): void
+    {
+        $this->apiUrl = $apiUrl;
+    }
+
+    /**
+     * Set custom headers (e.g., for Gravitee).
+     *
+     * @param array $headers
+     */
+    public function setHeaders(array $headers): void
+    {
+        $this->customHeaders = $headers;
+    }
+
+    /**
      * Send request.
      *
      * @param string $method
@@ -105,15 +139,16 @@ class APIClient
     public function sendRequest(string $method, string $endpoint, array $params = ['results' => 50]): array|false
     {
         try {
+            $headers = array_merge([
+                'Authorization' => 'Bearer ' . $this->accessToken,
+            ], $this->customHeaders);
             $requestOptions = [
-                'headers' => [
-                    'Authorization' => 'Bearer ' . $this->accessToken,
-                ],
+                'headers' => $headers,
                 'query' => $params,
             ];
             $response = $this->httpClient->$method(
-                self::API_URL . $endpoint,
-                $requestOptions,
+                $this->apiUrl . $endpoint,
+                $requestOptions
             );
             return json_decode($response->getBody()->getContents(), true);
         } catch (\Exception $e) {
