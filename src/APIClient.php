@@ -33,10 +33,24 @@ class APIClient
      */
     private Client $httpClient;
 
+    /**
+     * Client ID.
+     */
     private string $clientId;
+
+    /**
+     * Client secret.
+     */
     private string $clientSecret;
+
+    /**
+     * API URL.
+     */
     private string $apiUrl;
 
+    /**
+     * Custom headers for API requests.
+     */
     private array $customHeaders = [];
 
     public function __construct(?string $clientId = null, ?string $clientSecret = null, ?string $apiUrl = null)
