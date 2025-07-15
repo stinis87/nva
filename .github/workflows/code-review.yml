@@ -17,7 +17,7 @@ jobs:
 
       - name: Code review comment
         run: |
-          PROMPT='PROMPT='You are a senior software engineer reviewing a Git diff. Analyze the following code changes carefully and provide a professional code review. Focus on:
+          PROMPT='You are a senior software engineer reviewing a Git diff. Analyze the following code changes carefully and provide a professional code review. Focus on:
             Code quality and structure
             Adherence to best practices and conventions (language/framework-specific)
             Readability and maintainability
