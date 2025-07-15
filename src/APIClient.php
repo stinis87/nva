@@ -14,7 +14,7 @@ class APIClient
     /**
      * API URL.
      */
-    private const API_URL = 'https://api.test.nva.aws.unit.no/';
+    private const API_URL = 'https://api.nva.unit.no/';
 
     private const TOKEN_URL = 'https://nva-test-ext.auth.eu-west-1.amazoncognito.com/oauth2/token';
 
