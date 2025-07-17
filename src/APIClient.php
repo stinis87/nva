@@ -14,7 +14,7 @@ class APIClient
     /**
      * API URL.
      */
-    private const API_URL = 'https://api.test.nva.aws.unit.no/';
+    private const API_URL = 'https://api.nva.unit.no/';
 
     private const TOKEN_URL = 'https://nva-test-ext.auth.eu-west-1.amazoncognito.com/oauth2/token';
 
@@ -33,10 +33,24 @@ class APIClient
      */
     private Client $httpClient;
 
+    /**
+     * Client ID.
+     */
     private string $clientId;
+
+    /**
+     * Client secret.
+     */
     private string $clientSecret;
+
+    /**
+     * API URL.
+     */
     private string $apiUrl;
 
+    /**
+     * Custom headers for API requests.
+     */
     private array $customHeaders = [];
 
     public function __construct(?string $clientId = null, ?string $clientSecret = null, ?string $apiUrl = null)

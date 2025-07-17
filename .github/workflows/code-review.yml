@@ -17,7 +17,14 @@ jobs:
 
       - name: Code review comment
         run: |
-          PROMPT='Code review the changes below based on best practises:'
+          PROMPT='You are a senior software engineer reviewing a Git diff. Analyze the following code changes carefully and provide a professional code review. Focus on:
+            Code quality and structure
+            Adherence to best practices and conventions (language/framework-specific)
+            Readability and maintainability
+            Potential bugs or logical issues
+            Opportunities for simplification or refactoring
+            Security issues (if relevant)
+          Only comment on lines that are added or changed. If the code looks good, briefly acknowledge that. Be concise and constructive in your feedback. The changes are below:'
           RESPONSE=$(ollama run codellama "$PROMPT\n$(gh pr diff $PR_NUMBER)")
           gh pr comment $PR_NUMBER --body "$RESPONSE"
         env:

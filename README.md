@@ -37,7 +37,7 @@ An example of usage would be as follows:
 
 use Stinis\Nva\APIClient;
 
-$apiClient = new \Stinis\Nva\APIClient();
+$apiClient = new \Stinis\Nva\APIClient('CLIENT_ID', 'CLIENT_SECRET', 'API_URL');
 $results = $apiClient->getCristinCategories();
 
 ```
