@@ -55,22 +55,12 @@ class APIClient
 
     public function __construct(?string $clientId = null, ?string $clientSecret = null, ?string $apiUrl = null)
     {
+        $this->apiUrl = $apiUrl ?? 'https://api.nva.unit.no/';
         if ($clientId && $clientSecret) {
             $this->clientId = $clientId;
             $this->clientSecret = $clientSecret;
-        } else {
-            $dotenv = new Dotenv();
-            $envFilePath = $this->findEnvFile();
-            if ($envFilePath) {
-                $dotenv->load($envFilePath);
-            } else {
-                throw new \RuntimeException('Unable to locate .env file.');
-            }
-            $this->clientId = $_ENV['CLIENT_ID'] ?? '';
-            $this->clientSecret = $_ENV['CLIENT_SECRET'] ?? '';
         }
         $this->httpClient = new Client();
-        $this->apiUrl = $apiUrl ?? 'https://api.nva.unit.no/';
     }
 
     /**
@@ -153,11 +143,11 @@ class APIClient
     public function sendRequest(string $method, string $endpoint, array $params = ['results' => 50]): array|false
     {
         try {
-            $headers = array_merge([
-                'Authorization' => 'Bearer ' . $this->accessToken,
-            ], $this->customHeaders);
+            if (!isset($this->customHeaders['X-Gravitee-Api-Key'])) {
+                $this->setHeaders(['Authorization' => 'Bearer ' . $this->accessToken]);
+            }
             $requestOptions = [
-                'headers' => $headers,
+                'headers' => $this->customHeaders,
                 'query' => $params,
             ];
             $response = $this->httpClient->$method(
