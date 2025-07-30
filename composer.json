@@ -22,6 +22,6 @@
         "guzzlehttp/guzzle": "^7.9.2",
         "symfony/dotenv": "^6.4.12"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }
