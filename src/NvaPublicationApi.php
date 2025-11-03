@@ -9,7 +9,7 @@ trait NvaPublicationApi
      *
      * @return array
      */
-    public function getPublicationByOwner(): array
+    public function getPublicationByOwner(): array|false
     {
         return $this->sendRequest('GET', 'publication/by-owner');
     }
@@ -17,9 +17,9 @@ trait NvaPublicationApi
     /**
      * Delete a publication by UUID.
      *
-     * @return array
+     * @return array|false
      */
-    public function deletePublicationByUuid(string $uuid): array
+    public function deletePublicationByUuid(string $uuid): array|false
     {
         return $this->sendRequest('DELETE', 'publication/' . $uuid);
     }
@@ -27,9 +27,9 @@ trait NvaPublicationApi
     /**
      * Update a publication by UUID.
      *
-     * @return array
+     * @return array|false
      */
-    public function updatePublicationByUuid(string $uuid): array
+    public function updatePublicationByUuid(string $uuid): array|false
     {
         return $this->sendRequest('PUT', 'publication/' . $uuid);
     }
@@ -37,9 +37,9 @@ trait NvaPublicationApi
     /**
      * Get a publication by UUID.
      *
-     * @return array
+     * @return array|false
      */
-    public function getPublicationByUuid($uuid): array
+    public function getPublicationByUuid($uuid): array|false
     {
         return $this->sendRequest('GET', 'publication/' . $uuid);
     }
@@ -47,9 +47,9 @@ trait NvaPublicationApi
     /**
      * Get publication context.
      *
-     * @return array
+     * @return array|false
      */
-    public function getPublicationContext(): array
+    public function getPublicationContext(): array|false
     {
         return $this->sendRequest('GET', 'publication/context');
     }

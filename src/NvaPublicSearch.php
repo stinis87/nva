@@ -8,9 +8,9 @@ trait NvaPublicSearch
      * Search for publications.
      *
      * @param array $params
-     * @return array
+     * @return array|false
      */
-    public function searchPublications(array $params): array
+    public function searchPublications(array $params): array|false
     {
         return $this->sendRequest('GET', 'search/resources', $params);
     }
@@ -19,9 +19,9 @@ trait NvaPublicSearch
      * Export publications.
      *
      * @param array $params
-     * @return array
+     * @return array|false
      */
-    public function exportPublications(array $params): array
+    public function exportPublications(array $params): array|false
     {
         return $this->sendRequest('GET', 'search/resources/export', $params);
     }

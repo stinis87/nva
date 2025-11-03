@@ -11,9 +11,9 @@ trait CristinRequests
      * @param string $id
      * @param array $params
      *
-     * @return array
+     * @return array|false
      */
-    public function getCristinPersonByOrganization(string $id, $params = []): array
+    public function getCristinPersonByOrganization(string $id, $params = []): array|false
     {
         return $this->sendRequest('get', 'cristin/organization/' . $id . '/persons', $params);
     }
@@ -24,9 +24,9 @@ trait CristinRequests
      * @param string $id
      * @param array $params
      *
-     * @return array
+     * @return array|false
      */
-    public function getCristinOrganization(string $id, $params = []): array
+    public function getCristinOrganization(string $id, $params = []): array|false
     {
         return $this->sendRequest('get', 'cristin/organization/' . $id, $params);
     }
@@ -36,9 +36,9 @@ trait CristinRequests
      *
      * @param array $params
      *
-     * @return array
+     * @return array|false
      */
-    public function getCristinOrganizationByQueryParameters(array $params): array
+    public function getCristinOrganizationByQueryParameters(array $params): array|false
     {
         return $this->sendRequest('get', 'cristin/organization', $params);
     }
@@ -46,9 +46,9 @@ trait CristinRequests
     /**
      * Get Cristin supported countries.
      *
-     * @return array
+     * @return array|false
      */
-    public function getCristinSupportedCountries(): array
+    public function getCristinSupportedCountries(): array|false
     {
         return $this->sendRequest('get', 'cristin/country');
     }
@@ -56,9 +56,9 @@ trait CristinRequests
     /**
      * Get Cristin funding sources.
      *
-     * @return array
+     * @return array|false
      */
-    public function getCristinFundingSources(): array
+    public function getCristinFundingSources(): array|false
     {
         return $this->sendRequest('get', 'cristin/funding-sources');
     }
@@ -68,9 +68,9 @@ trait CristinRequests
      *
      * @param string $id
      *
-     * @return array
+     * @return array|false
      */
-    public function getCristinFundingSourceById(string $id): array
+    public function getCristinFundingSourceById(string $id): array|false
     {
         return $this->sendRequest('get', 'cristin/funding-sources/' . $id);
     }
@@ -79,9 +79,9 @@ trait CristinRequests
      * Get Cristin project by ID.
      *
      * @param string $id
-     * @return array
+     * @return array|false
      */
-    public function getCristinProjectById(string $id): array
+    public function getCristinProjectById(string $id): array|false
     {
         // Pass empty query params here since endpoint does not support any.
         return $this->sendRequest('get', 'cristin/project/' . $id, []);
@@ -91,9 +91,9 @@ trait CristinRequests
      * Get Cristin project by query parameters.
      *
      * @param array $params
-     * @return array
+     * @return array|false
      */
-    public function getCristinProjectByQueryParameters(array $params): array
+    public function getCristinProjectByQueryParameters(array $params): array|false
     {
         return $this->sendRequest('get', 'cristin/project/', $params);
     }
@@ -102,9 +102,9 @@ trait CristinRequests
      * Get Cristin person by ID.
      *
      * @param string $id
-     * @return array
+     * @return array|false
      */
-    public function getCristinPersonById(string $id): array
+    public function getCristinPersonById(string $id): array|false
     {
         // Pass empty query params here since endpoint does not support any.
         return $this->sendRequest('get', 'cristin/person/' . $id, []);
@@ -114,9 +114,9 @@ trait CristinRequests
      * Get Cristin person by query parameters.
      *
      * @param array $params
-     * @return array
+     * @return array|false
      */
-    public function getCristinPersonByQueryParameters(array $params): array
+    public function getCristinPersonByQueryParameters(array $params): array|false
     {
         return $this->sendRequest('get', 'cristin/person/', $params);
     }
@@ -125,9 +125,9 @@ trait CristinRequests
      * Get Cristin keywords by id.
      *
      * @param string $id
-     * @return array
+     * @return array|false
      */
-    public function getCristinKeywordById(string $id): array
+    public function getCristinKeywordById(string $id): array|false
     {
         return $this->sendRequest('get', 'cristin/keyword/' . $id);
     }
@@ -136,9 +136,9 @@ trait CristinRequests
      * Get Cristin keywords.
      *
      * @param array $params
-     * @return array
+     * @return array|false
      */
-    public function getCristinKeywords($params = []): array
+    public function getCristinKeywords($params = []): array|false
     {
         return $this->sendRequest('get', 'cristin/keyword', $params);
     }
@@ -146,9 +146,9 @@ trait CristinRequests
     /**
      * Get Cristin categories.
      *
-     * @return array
+     * @return array|false
      */
-    public function getCristinCategories(): array
+    public function getCristinCategories(): array|false
     {
         return $this->sendRequest('get', 'cristin/category/project');
     }
@@ -158,9 +158,9 @@ trait CristinRequests
      *
      * @param string $id
      * @param array $params
-     * @return array
+     * @return array|false
      */
-    public function getCristinProjectsByOrganization(string $id, $params = []): array
+    public function getCristinProjectsByOrganization(string $id, $params = []): array|false
     {
         return $this->sendRequest('get', 'cristin/organization/' . $id . '/projects', $params);
     }
