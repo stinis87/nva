@@ -49,13 +49,19 @@ class APIClient
     private string $apiUrl;
 
     /**
+     * Token URL.
+     */
+    private string $tokenUrl;
+
+    /**
      * Custom headers for API requests.
      */
     private array $customHeaders = [];
 
-    public function __construct(?string $clientId = null, ?string $clientSecret = null, ?string $apiUrl = null)
+    public function __construct(?string $clientId = null, ?string $clientSecret = null, ?string $apiUrl = null, ?string $tokenUrl = null)
     {
-        $this->apiUrl = $apiUrl ?? 'https://api.nva.unit.no/';
+        $this->apiUrl = $apiUrl ?? self::API_URL;
+        $this->tokenUrl = $tokenUrl ?? self::TOKEN_URL;
         if ($clientId && $clientSecret) {
             $this->clientId = $clientId;
             $this->clientSecret = $clientSecret;
@@ -97,7 +103,7 @@ class APIClient
             'client_secret' => $this->clientSecret,
         ];
         // Make a POST request to obtain access token
-        $response = $this->httpClient->post(self::TOKEN_URL, [
+        $response = $this->httpClient->post($this->tokenUrl, [
             'form_params' => $params,
         ]);
         if ($response->getStatusCode() !== 200) {
@@ -119,6 +125,16 @@ class APIClient
     public function setApiUrl(string $apiUrl): void
     {
         $this->apiUrl = $apiUrl;
+    }
+
+    /**
+     * Set the Token URL.
+     *
+     * @param string $tokenUrl
+     */
+    public function setTokenUrl(string $tokenUrl): void
+    {
+      $this->tokenUrl = $tokenUrl;
     }
 
     /**
