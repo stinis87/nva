@@ -154,9 +154,9 @@ class APIClient
      * @param string $endpoint
      * @param array $params
      *
-     * @return array|false
+     * @return array
      */
-    public function sendRequest(string $method, string $endpoint, array $params = ['results' => 50]): array|false
+    public function sendRequest(string $method, string $endpoint, array $params = ['results' => 50]): array
     {
         try {
             if (!isset($this->customHeaders['X-Gravitee-Api-Key'])) {
@@ -172,8 +172,7 @@ class APIClient
             );
             return json_decode($response->getBody()->getContents(), true);
         } catch (\Exception $e) {
-            echo($e->getMessage());
-            return false;
+            throw $e;
         }
     }
 }
