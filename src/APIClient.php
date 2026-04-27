@@ -148,6 +148,18 @@ class APIClient
     }
 
     /**
+     * Set an access token on the client.
+     *
+     * @param string $accessToken
+     * @param int $accessTokenExpiration
+     */
+    public function setAccessToken(string $accessToken, int $accessTokenExpiration): void
+    {
+        $this->accessToken = $accessToken;
+        $this->accessTokenExpiration = $accessTokenExpiration;
+    }
+
+    /**
      * Send request.
      *
      * @param string $method
